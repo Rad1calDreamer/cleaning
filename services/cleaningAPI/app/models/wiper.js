@@ -9,12 +9,7 @@ const Schema = mongoose.Schema({
 	phone: {
 		type: String,
 		required: true
-	},
-
-	client_id: {
-		type: mongoose.Schema.Types.ObjectId,
-		ref: 'User'
-	 },
+	}
 });
 
 mongoose.model('Wiper', Schema);

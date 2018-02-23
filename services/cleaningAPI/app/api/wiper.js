@@ -2,12 +2,12 @@ const mongoose = require('mongoose');
 
 const api = {};
 
-api.add = (User, Wiper, Token) => (req, res) => {
+api.store = (User, Wiper, Token) => (req, res) => {
   if (Token) {
     const wiper = new Wiper({
       user_id: req.body.user_id,
-      name: 'req.body.name',
-      phone: 'req.body.phone',
+      name: req.body.name,
+      phone: req.body.phone
     });
 
     wiper.save(error => {
@@ -18,8 +18,9 @@ api.add = (User, Wiper, Token) => (req, res) => {
 }
 
 api.getAll = (User, Wiper, Token) => (req, res) => {
+  console.log(req);
   if (Token) {
-	Wiper.find({/* user_id: req.query.user_id */ name:'foo'}, (error, wiper) => {
+	Wiper.find({}, (error, wiper) => {
       if (error) return res.status(400).json(error);
       res.status(200).json(wiper);
       return true;
