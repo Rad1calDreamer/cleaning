@@ -1,0 +1,41 @@
+{
+  "name": "cleaning",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "lockfileVersion": 1,
+  "_moduleAliases": {
+    "@root": ".",
+    "@cleaning": "./services/cleaningAPI",
+    "@cleaningModels":"./services/cleaningAPI/app/models",
+    "@cleaningAPI":"./services/cleaningAPI/config/app.js",
+    "@config": "./services/cleaningAPI/config/index.js"
+  },
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.2",
+    "consign": "^0.1.6",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "jsonwebtoken": "^8.1.1",
+    "module-alias": "^2.0.6",
+    "mongoose": "^5.0.6",
+    "morgan": "^1.9.0",
+    "passport": "^0.4.0",
+    "passport-jwt": "^3.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rad1calDreamer/cleaning.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rad1calDreamer/cleaning/issues"
+  },
+  "homepage": "https://github.com/Rad1calDreamer/cleaning#readme"
+}

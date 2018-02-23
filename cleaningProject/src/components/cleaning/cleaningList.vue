@@ -1,0 +1,10 @@
+<template>
+  <section class="l-cleaning-list-container">
+    <slot name="cleaning-list-header"></slot>
+    <slot name="cleaning-list-body"></slot>
+  </section>
+</template>
+
+<script>
+  export default {}
+</script>
