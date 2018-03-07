@@ -18,7 +18,6 @@ api.store = (User, Wiper, Token) => (req, res) => {
 }
 
 api.getAll = (User, Wiper, Token) => (req, res) => {
-  console.log(req);
   if (Token) {
 	Wiper.find({}, (error, wiper) => {
       if (error) return res.status(400).json(error);

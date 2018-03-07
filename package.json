@@ -7,8 +7,8 @@
   "_moduleAliases": {
     "@root": ".",
     "@cleaning": "./services/cleaningAPI",
-    "@cleaningModels":"./services/cleaningAPI/app/models",
-    "@cleaningAPI":"./services/cleaningAPI/config/app.js",
+    "@cleaningModels": "./services/cleaningAPI/app/models",
+    "@cleaningAPI": "./services/cleaningAPI/config/app.js",
     "@config": "./services/cleaningAPI/config/index.js"
   },
   "dependencies": {

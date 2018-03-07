@@ -9,11 +9,13 @@ import Authentication from '@/components/pages/Authentication/Authentication'
 // Global components
 import Header from '@/components/Header'
 import CleaningList from '@/components/cleaning/cleaningList'
+import WiperAdd from '@/components/wipers/add'
 
 
 // Register components
 Vue.component('app-header', Header)
 Vue.component('cleaning-list', CleaningList)
+Vue.component('wiper-add', WiperAdd)
 
 Vue.use(Router)
 const router = new Router({
