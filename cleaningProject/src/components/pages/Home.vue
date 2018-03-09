@@ -6,19 +6,13 @@
       <h4 class="white--text text-xs-center my-0">
         Focus cleaning Manager
       </h4>
-      <wiper-add></wiper-add>
 
-      <cleaning-list>
-        <cleaning-list-header slot="cleaning-list-header"></cleaning-list-header>
-        <cleaning-list-body slot="cleaning-list-body" :wipers="wipers"></cleaning-list-body>
-      </cleaning-list>
     </div>
   </main>
 </template>
 
 <script>
 import Axios from "axios";
-import wipersAdd from "./../wipers/add";
 import Authentication from "@/components/pages/Authentication";
 import cleaningListHeader from "./../cleaning/cleaningListHeader";
 import cleaningListBody from "./../cleaning/cleaningListBody";
@@ -34,10 +28,10 @@ export default {
     };
   },
   mounted() {
-    this.getAllcleanings();
+    // this.getWipers();
   },
   methods: {
-    getAllcleanings() {
+    getWipers() {
       Axios.get(`${cleaningManagerAPI}/api/v1/wipers`, {
         headers: {
           Authorization: Authentication.getAuthenticationHeader(this)

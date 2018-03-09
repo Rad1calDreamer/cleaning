@@ -1,5 +1,6 @@
 <template>
   <header class="l-header-container">
+    <app-menu></app-menu>
     <v-layout row wrap>
       <v-flex xs12 md5>
         <v-text-field v-model="search"

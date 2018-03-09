@@ -32,7 +32,6 @@
 </template>
 
 <script>
-import AddWipers from "@/components/pages/Wipers";
 export default {
   data() {
     return {
@@ -47,9 +46,6 @@ export default {
     };
   },
   methods: {
-    addWiper() {
-		AddWipers.add(this, this.wipers, "/");
-    }
   }
 };
 </script>

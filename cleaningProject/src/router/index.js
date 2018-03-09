@@ -4,18 +4,21 @@ import * as Auth from '@/components/pages/Authentication'
 
 // Pages
 import Home from '@/components/pages/Home'
+import Wipers from '@/components/pages/Wipers/Wipers'
 import Authentication from '@/components/pages/Authentication/Authentication'
 
 // Global components
 import Header from '@/components/Header'
+import Modal from '@/components/Modal'
+import Menu from '@/components/Menu'
 import CleaningList from '@/components/cleaning/cleaningList'
-import WiperAdd from '@/components/wipers/add'
 
 
 // Register components
 Vue.component('app-header', Header)
 Vue.component('cleaning-list', CleaningList)
-Vue.component('wiper-add', WiperAdd)
+Vue.component('app-menu', Menu)
+Vue.component('app-modal', Modal)
 
 Vue.use(Router)
 const router = new Router({
@@ -26,7 +29,8 @@ const router = new Router({
       components: {
         default: Home,
         header: Header,
-        cleaningList: CleaningList
+        cleaningList: CleaningList,
+        menu: Menu
       },
       meta: {
         requiredAuth: true
@@ -36,9 +40,23 @@ const router = new Router({
       path: '/login',
       name: 'Authentication',
       component: Authentication
+    },
+    {
+      path: '/wipers',
+      name: 'Wipers',
+      components: {
+        default: Wipers,
+        header: Header,
+        cleaningList: CleaningList,
+        menu: Menu,
+        modal: Modal
+      },
+      meta: {
+        requiredAuth: true
+      }
     }
   ]
-})
+});
 router.beforeEach((to, from, next) => {
   if (to.meta.requiredAuth) {
     if (Auth.default.user.authenticated) {

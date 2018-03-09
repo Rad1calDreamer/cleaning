@@ -2,3 +2,5 @@
 .vscode
 node_modules
 services/cleaningAPI/config/index.js
+/node_modules/
+/cleaningProject/node_modules/
