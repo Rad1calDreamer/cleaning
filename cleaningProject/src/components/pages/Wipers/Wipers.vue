@@ -13,7 +13,7 @@
         <cleaning-list-body slot="cleaning-list-body" :wipers="wipers"></cleaning-list-body>
       </cleaning-list>
     </div>
-    <app-modal v-if="showModal" @close="showModal = false"/>
+    <add-form v-if="showModal" @close="showModal = false"></add-form>
   </main>
 </template>
 
@@ -22,14 +22,14 @@
   import Authentication from '@/components/pages/Authentication';
   import cleaningListHeader from '../../cleaning/cleaningListHeader';
   import cleaningListBody from '../../cleaning/cleaningListBody';
-  import modal from '../../Modal';
+  import addForm from '../../pages/Wipers/Add';
 
   const cleaningManagerAPI = `http://${window.location.hostname}:3001`;
   export default {
     components: {
       'cleaning-list-header': cleaningListHeader,
       'cleaning-list-body': cleaningListBody,
-      'app-modal': modal
+      'add-form': addForm
     },
     data() {
       return {

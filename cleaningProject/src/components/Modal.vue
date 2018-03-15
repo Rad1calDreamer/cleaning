@@ -3,6 +3,7 @@
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
+          <slot></slot>
           <!--<div class="l-auth-container">-->
             <!--<div class="l-auth">-->
               <!--<v-form v-model="validLogin">-->
