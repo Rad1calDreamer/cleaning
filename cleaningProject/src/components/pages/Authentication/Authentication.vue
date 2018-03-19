@@ -71,7 +71,7 @@
         signUpVisible: false,
         loginPasswordVisible: false,
         signUpPasswordVisible: false,
-        rules: [ (value) => !!value || 'This field is required' ],
+        rules: [ (value) => !!value || 'Обязательное поле' ],
         credentials: {
           username: '',
           password: ''

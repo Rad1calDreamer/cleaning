@@ -1,21 +1,23 @@
 <template>
   <div>
-    <app-modal>
+    <app-modal @closeModal="closeModal">
     <div class="l-auth-container">
       <div class="l-auth">
         <v-form v-model="wiperAdd">
-          <v-text-field label="WiperName"
-                        v-model="wipers.name"
+          <v-text-field label="ФИО"
+                        v-model="wiper.name"
                         prepend-icon="account_box"
                         :rules="rules"
                         required
                         color="light-blue lighten-1">
           </v-text-field>
 
-          <v-text-field label="Phone"
-                        v-model="wipers.phone"
+          <v-text-field label="Телефон"
+                        v-model="wiper.phone"
                         prepend-icon="phone"
                         :rules="rules"
+                        return-masked-value
+                        mask="###-###-##-##"
                         color="light-blue lighten-1"
                         required>
           </v-text-field>
@@ -23,13 +25,6 @@
           <v-btn color="light-blue lighten-1" @click.native="addWiper()">Добавить</v-btn>
         </v-form>
       </div>
-
-      <!-- <v-snackbar timeout="6000"
-                  bottom="bottom"
-                  color="red lighten-1"
-                  v-model="snackbar">
-        {{ message }}
-      </v-snackbar> -->
     </div>
     </app-modal>
   </div>
@@ -37,7 +32,10 @@
 
 <script>
   import modal from '../../Modal';
-
+  import Axios from 'axios';
+  import Authentication from '@/components/pages/Authentication';
+  import Wipers from '@/components/pages/Wipers';
+  const cleaningManagerAPI = `http://${window.location.hostname}:3001`;
   export default {
     components: {
       'app-modal': modal,
@@ -46,15 +44,22 @@
       return {
         snackbar: false,
         wiperAdd: false,
-        rules: [value => !!value || 'This field is required'],
-        wipers: {
+        rules: [value => !!value || 'Обязательное поле'],
+        wiper: {
           name: '',
           phone: ''
         },
         message: ''
       };
     },
-    methods: {}
+    methods: {
+      addWiper: function(){
+        Wipers.add(this, this.wiper);
+      },
+      closeModal(){
+       this.$emit('closeModal')
+      }
+    }
   };
 </script>
 <style lang="scss">
@@ -63,7 +68,6 @@
   .l-auth {
     background-color: $background-color;
     padding: 15px;
-    margin: 45px auto;
     min-width: 272px;
     max-width: 320px;
     animation: bounceIn 1s forwards ease;

@@ -13,7 +13,7 @@
         <cleaning-list-body slot="cleaning-list-body" :wipers="wipers"></cleaning-list-body>
       </cleaning-list>
     </div>
-    <add-form v-if="showModal" @close="showModal = false"></add-form>
+    <add-form v-if="showModal" @closeModal="showModal = false"></add-form>
   </main>
 </template>
 
@@ -51,6 +51,12 @@
       },
       addWiper() {
         this.showModal = true;
+      },
+      closeModal(){
+        this.showModal = false;
+      },
+      foo(){
+        alert(1)
       }
     }
   };
