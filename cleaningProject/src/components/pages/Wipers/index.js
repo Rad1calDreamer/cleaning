@@ -19,4 +19,15 @@ export default {
       context.message = data.message
     })
   },
+  remove(context, id){
+    Axios.post(`${cleaningManagerAPI}/api/v1/wipers/remove`, {id:id},{
+        headers: {
+          Authorization: Authentication.getAuthenticationHeader(context)
+        }})
+      .then(() => {
+        context.getWipers();
+      }).catch(({ response: { data } }) => {
+        console.log('error', data)
+    })
+  }
 }

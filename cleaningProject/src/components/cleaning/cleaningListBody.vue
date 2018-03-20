@@ -10,7 +10,7 @@
         <v-btn small flat color="yellow accent-1">
           <v-icon>mode_edit</v-icon>
         </v-btn>
-        <v-btn small flat color="red lighten-1">
+        <v-btn small flat color="red lighten-1" @click.native="$emit('removeItem', wiper._id)">
           <v-icon>delete_forever</v-icon>
         </v-btn>
       </div>
@@ -39,7 +39,7 @@
         margin: 0;
       }
       .md-cleaning-info {
-        flex-basis: 25%;
+        flex-basis: calc(100% / 3);
         width: 100%;
         background-color: rgba(0, 175, 255, 0.45);
         border: 1px solid $border-color-input;
@@ -59,7 +59,7 @@
         }
       }
       .l-cleaning-actions {
-        flex-basis: 25%;
+        flex-basis: calc(100% / 3);
         display: flex;
         background-color: rgba(0, 175, 255, 0.45);
         border: 1px solid $border-color-input;

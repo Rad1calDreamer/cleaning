@@ -10,7 +10,7 @@
 
       <cleaning-list>
         <cleaning-list-header slot="cleaning-list-header"></cleaning-list-header>
-        <cleaning-list-body slot="cleaning-list-body" :wipers="wipers"></cleaning-list-body>
+        <cleaning-list-body slot="cleaning-list-body" :wipers="wipers" @removeItem="removeWiper"></cleaning-list-body>
       </cleaning-list>
     </div>
     <add-form v-if="showModal" @closeModal="showModal = false"></add-form>
@@ -23,6 +23,7 @@
   import cleaningListHeader from '../../cleaning/cleaningListHeader';
   import cleaningListBody from '../../cleaning/cleaningListBody';
   import addForm from '../../pages/Wipers/Add';
+  import Wipers from '@/components/pages/Wipers';
 
   const cleaningManagerAPI = `http://${window.location.hostname}:3001`;
   export default {
@@ -52,11 +53,11 @@
       addWiper() {
         this.showModal = true;
       },
+      removeWiper(id){
+        Wipers.remove(this, id);
+      },
       closeModal(){
         this.showModal = false;
-      },
-      foo(){
-        alert(1)
       }
     }
   };

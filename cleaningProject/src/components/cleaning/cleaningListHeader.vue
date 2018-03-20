@@ -22,6 +22,7 @@
     }
     .md-cleaning-header {
       width: 100%;
+      flex-basis: calc(100% / 3);
       background-color: $background-color;
       border: 1px solid $border-color-input;
       padding: 0 15px;
