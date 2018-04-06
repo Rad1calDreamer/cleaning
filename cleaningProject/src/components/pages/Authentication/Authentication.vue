@@ -94,10 +94,10 @@
     }
   }
 </script>
-<style lang="scss">
-  @import "./../../../assets/styles";
+<style lang="less">
+  @import "../../../assets/styles.less";
 .l-auth {
-    background-color: $background-color;
+    background-color: @border-color-input;
     padding: 15px;
     margin: 45px auto;
     min-width: 272px;
@@ -105,7 +105,7 @@
     animation: bounceIn 1s forwards ease;
   }
 .l-signup {
-    background-color: $background-color;
+    background-color: @border-color-input;
     padding: 15px;
     margin: 45px auto;
     min-width: 272px;

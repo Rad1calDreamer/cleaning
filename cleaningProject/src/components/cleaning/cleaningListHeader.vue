@@ -11,8 +11,8 @@
   export default {}
 </script>
 
-<style lang="scss">
-  @import "./../../assets/styles";
+<style lang="less">
+  @import "../../assets/styles.less";
   .l-cleaning-header {
     display: none;
     width: 100%;
@@ -23,8 +23,8 @@
     .md-cleaning-header {
       width: 100%;
       flex-basis: calc(100% / 3);
-      background-color: $background-color;
-      border: 1px solid $border-color-input;
+      background-color: @background-color;
+      border: 1px solid @border-color-input;
       padding: 0 15px;
       display: flex;
       height: 45px;

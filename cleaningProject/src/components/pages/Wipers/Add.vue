@@ -62,11 +62,11 @@
     }
   };
 </script>
-<style lang="scss">
-  @import "../../../assets/styles";
+<style lang="less">
+  @import "../../../assets/styles.less";
 
   .l-auth {
-    background-color: $background-color;
+    background-color: @border-color-input;
     padding: 15px;
     min-width: 272px;
     max-width: 320px;
@@ -74,7 +74,7 @@
   }
 
   .l-signup {
-    background-color: $background-color;
+    background-color: @border-color-input;
     padding: 15px;
     margin: 45px auto;
     min-width: 272px;

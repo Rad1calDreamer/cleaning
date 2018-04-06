@@ -50,10 +50,10 @@
   }
 </script>
 
-<style lang="scss">
-  @import "./../assets/styles";
+<style lang="less">
+  @import "../assets/styles.less";
   .l-header-container {
-    background-color: $background-color;
+    background-color: @background-color;
     margin: 0 auto;
     padding: 0 15px;
     min-width: 272px;
@@ -62,7 +62,7 @@
     }
     .input-group__details {
       &:before {
-        background-color: $border-color-input !important;
+        background-color: @border-color-input !important;
       }
     }
     .btn {

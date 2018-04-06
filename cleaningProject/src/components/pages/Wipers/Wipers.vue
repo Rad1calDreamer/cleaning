@@ -3,11 +3,10 @@
     <app-header></app-header>
 
     <div class="l-home">
-      <h4 class="white--text text-xs-center my-0">
-        Список дворников
-      </h4>
-      <v-btn @click.native="addWiper">Добавить</v-btn>
-
+      <h1 class="white--text text-xs-center my-0">Список дворников</h1>
+      <div class="add-button">
+        <v-btn @click.native="addWiper">Добавить</v-btn>
+      </div>
       <cleaning-list>
         <cleaning-list-header slot="cleaning-list-header"></cleaning-list-header>
         <cleaning-list-body slot="cleaning-list-body" :wipers="wipers" @removeItem="removeWiper" @editItem="editWiper"></cleaning-list-body>
@@ -73,11 +72,14 @@
   };
 </script>
 
-<style lang="scss" scoped>
-  @import "../../../assets/styles";
-
+<style lang="less" scoped>
+  @import "../../../assets/styles.less";
+  .add-button{
+    display: flex;
+    justify-content: flex-end;
+  }
   .l-home {
-    background-color: $background-color;
+    background-color: @border-color-input;
     margin: 25px auto;
     padding: 15px;
     min-width: 272px;

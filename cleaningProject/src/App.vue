@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app dark>
     <v-container>
       <router-view/>
     </v-container>
@@ -12,14 +12,14 @@ export default {
 }
 </script>
 
-<style lang="scss">
-  @import "./assets/styles";
+<style lang="less">
+  @import "assets/styles.less";
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  color: @baseText;
+  /*margin-top: 60px;*/
 }
 </style>

@@ -4,7 +4,7 @@
       <div class="md-cleaning-info white--text">{{ wiper.name }}</div>
       <div class="md-cleaning-info white--text">{{ wiper.phone }}</div>
       <div class="l-cleaning-actions">
-        <v-btn small flat color="light-blue lighten-1">
+        <v-btn small flat color="light-blue lighten-1"  v-if="visibility">
           <v-icon small>visibility</v-icon>
         </v-btn>
         <v-btn small flat color="yellow accent-1" @click.native="$emit('editItem', wiper)">
@@ -24,8 +24,8 @@
   }
 </script>
 
-<style lang="scss">
-  @import "./../../assets/styles";
+<style lang="less">
+  @import "../../assets/styles.less";
   .l-cleaning-body {
     display: flex;
     flex-direction: column;
@@ -42,7 +42,7 @@
         flex-basis: calc(100% / 3);
         width: 100%;
         background-color: rgba(0, 175, 255, 0.45);
-        border: 1px solid $border-color-input;
+        border: 1px solid @border-color-input;
         padding: 0 15px;
         display: flex;
         height: 35px;
@@ -62,7 +62,7 @@
         flex-basis: calc(100% / 3);
         display: flex;
         background-color: rgba(0, 175, 255, 0.45);
-        border: 1px solid $border-color-input;
+        border: 1px solid @border-color-input;
         align-items: center;
         justify-content: center;
         .btn {

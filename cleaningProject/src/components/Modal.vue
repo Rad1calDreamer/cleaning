@@ -33,8 +33,8 @@
   };
 </script>
 
-<style scoped lang="scss">
-@import '../assets/styles';
+<style scoped lang="less">
+@import '../assets/styles.less';
   .modal-mask {
     position: fixed;
     z-index: 9998;
@@ -62,7 +62,7 @@
     cursor: pointer;
   }
   .closeIcon:hover{
-    color: $background-tint;
+    color: @background-tint;
   }
 
   .modal-container {

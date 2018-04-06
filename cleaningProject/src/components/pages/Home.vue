@@ -1,7 +1,5 @@
 <template>
   <main class="l-home-page">
-    <app-header></app-header>
-
     <div class="l-home">
       <h4 class="white--text text-xs-center my-0">
         Focus cleaning Manager
@@ -43,10 +41,10 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-@import "./../../assets/styles";
+<style lang="less" scoped>
+@import "../../assets/styles.less";
 .l-home {
-  background-color: $background-color;
+  background-color: @border-color-input;
   margin: 25px auto;
   padding: 15px;
   min-width: 272px;
