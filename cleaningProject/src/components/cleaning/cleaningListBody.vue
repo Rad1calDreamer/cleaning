@@ -7,7 +7,7 @@
         <v-btn small flat color="light-blue lighten-1">
           <v-icon small>visibility</v-icon>
         </v-btn>
-        <v-btn small flat color="yellow accent-1">
+        <v-btn small flat color="yellow accent-1" @click.native="$emit('editItem', wiper)">
           <v-icon>mode_edit</v-icon>
         </v-btn>
         <v-btn small flat color="red lighten-1" @click.native="$emit('removeItem', wiper._id)">

@@ -29,5 +29,18 @@ export default {
       }).catch(({ response: { data } }) => {
         console.log('error', data)
     })
+  },
+
+  edit(context, wiper){
+    Axios.post(`${cleaningManagerAPI}/api/v1/wipers/edit`, wiper,{
+        headers: {
+          Authorization: Authentication.getAuthenticationHeader(context)
+        }})
+      .then(() => {
+        context.getWipers();
+        context.$parent.showModalEdit = false;
+      }).catch(({ response: { data } }) => {
+        console.log('error', data)
+    })
   }
 }

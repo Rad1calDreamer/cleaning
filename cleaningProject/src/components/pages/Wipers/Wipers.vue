@@ -10,10 +10,11 @@
 
       <cleaning-list>
         <cleaning-list-header slot="cleaning-list-header"></cleaning-list-header>
-        <cleaning-list-body slot="cleaning-list-body" :wipers="wipers" @removeItem="removeWiper"></cleaning-list-body>
+        <cleaning-list-body slot="cleaning-list-body" :wipers="wipers" @removeItem="removeWiper" @editItem="editWiper"></cleaning-list-body>
       </cleaning-list>
     </div>
     <add-form v-if="showModal" @closeModal="showModal = false"></add-form>
+    <edit-form v-if="showModalEdit" @closeModal="showModalEdit = false" :wiper="_curWiper"></edit-form>
   </main>
 </template>
 
@@ -23,6 +24,7 @@
   import cleaningListHeader from '../../cleaning/cleaningListHeader';
   import cleaningListBody from '../../cleaning/cleaningListBody';
   import addForm from '../../pages/Wipers/Add';
+  import editForm from '../../pages/Wipers/Edit';
   import Wipers from '@/components/pages/Wipers';
 
   const cleaningManagerAPI = `http://${window.location.hostname}:3001`;
@@ -30,12 +32,16 @@
     components: {
       'cleaning-list-header': cleaningListHeader,
       'cleaning-list-body': cleaningListBody,
-      'add-form': addForm
+      'add-form': addForm,
+      'edit-form': editForm
     },
     data() {
       return {
+        _curWiper:{},
         wipers: [],
-        showModal: false
+        showModal: false,
+        showModalEdit: false
+
       };
     },
     mounted() {
@@ -55,6 +61,10 @@
       },
       removeWiper(id){
         Wipers.remove(this, id);
+      },
+      editWiper(item){
+        this.showModalEdit = true;
+        this._curWiper = item;
       },
       closeModal(){
         this.showModal = false;

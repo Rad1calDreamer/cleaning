@@ -1,0 +1,78 @@
+<template>
+  <div>
+    <app-modal @closeModal="closeModal">
+    <div class="l-auth-container">
+      <div class="l-auth">
+        <v-form v-model="wiperAdd">
+          <v-text-field label="ФИО"
+                        v-model="wiper.name"
+                        prepend-icon="account_box"
+                        :rules="rules"
+                        required
+                        color="light-blue lighten-1">
+          </v-text-field>
+
+          <v-text-field label="Телефон"
+                        v-model="wiper.phone"
+                        prepend-icon="phone"
+                        :rules="rules"
+                        return-masked-value
+                        mask="###-###-##-##"
+                        color="light-blue lighten-1"
+                        required>
+          </v-text-field>
+
+          <v-btn color="light-blue lighten-1" @click.native="editWiper()">Обновить</v-btn>
+        </v-form>
+      </div>
+    </div>
+    </app-modal>
+  </div>
+</template>
+
+<script>
+  import modal from '../../Modal';
+  import Wipers from '@/components/pages/Wipers';
+  export default {
+    props:['wiper'],
+    components: {
+      'app-modal': modal,
+    },
+    data() {
+      return {
+        snackbar: false,
+        wiperAdd: false,
+        rules: [value => !!value || 'Обязательное поле'],
+        message: ''
+      };
+    },
+    methods: {
+      editWiper: function(){
+        Wipers.edit(this, this.wiper);
+      },
+      closeModal(){
+       this.$emit('closeModal')
+      }
+    }
+  };
+</script>
+<style lang="scss">
+  @import "../../../assets/styles";
+
+  .l-auth {
+    background-color: $background-color;
+    padding: 15px;
+    min-width: 272px;
+    max-width: 320px;
+    animation: bounceIn 1s forwards ease;
+  }
+
+  .l-signup {
+    background-color: $background-color;
+    padding: 15px;
+    margin: 45px auto;
+    min-width: 272px;
+    max-width: 320px;
+    animation: slideInFromLeft 1s forwards ease;
+  }
+</style>

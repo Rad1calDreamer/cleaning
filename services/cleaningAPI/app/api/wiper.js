@@ -51,4 +51,23 @@ api.remove = (User, Wiper, Token) => (req, res)=>{
    }
 };
 
+api.edit = (User, Wiper, Token) => (req, res)=>{
+   if (Token) {
+      const wiper = {
+         id: req.body._id,
+         name: req.body.name,
+         phone: req.body.phone
+      };
+      Wiper.update({'_id': new ObjectId(wiper.id)}, wiper, (error) =>{
+         if (error) {
+            return res.status(400).json(error);
+         }
+         res.status(200).json({ success: true, message: 'updated' });
+         return true;
+      });
+   } else {
+      return res.status(403).send({ success: false, message: 'Unauthorized' });
+   }
+};
+
 module.exports = api;
