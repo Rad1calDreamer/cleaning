@@ -4,9 +4,9 @@
       <div class="md-cleaning-info white--text">{{ wiper.name }}</div>
       <div class="md-cleaning-info white--text">{{ wiper.phone }}</div>
       <div class="l-cleaning-actions">
-        <v-btn small flat color="light-blue lighten-1"  v-if="visibility">
-          <v-icon small>visibility</v-icon>
-        </v-btn>
+        <!--<v-btn small flat color="light-blue lighten-1"  v-if="visibility">-->
+          <!--<v-icon small>visibility</v-icon>-->
+        <!--</v-btn>-->
         <v-btn small flat color="yellow accent-1" @click.native="$emit('editItem', wiper)">
           <v-icon>mode_edit</v-icon>
         </v-btn>

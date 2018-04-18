@@ -2,7 +2,7 @@ import Axios from 'axios'
 import router from '@/router'
 import Authentication from "@/components/pages/Authentication";
 
-const cleaningManagerAPI = `http://${window.location.hostname}:3001`
+const cleaningManagerAPI = `http://${window.location.hostname}:3001`;
 
 export default {
 
@@ -37,7 +37,6 @@ export default {
           Authorization: Authentication.getAuthenticationHeader(context)
         }})
       .then(() => {
-        context.getWipers();
         context.$parent.showModalEdit = false;
       }).catch(({ response: { data } }) => {
         console.log('error', data)
