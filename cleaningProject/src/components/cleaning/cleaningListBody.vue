@@ -1,16 +1,16 @@
 <template>
   <section class="l-cleaning-body">
-    <div class="md-cleaning" v-if="wipers != null" v-for="(wiper) in wipers" :key="wiper.id">
-      <div class="md-cleaning-info white--text">{{ wiper.name }}</div>
-      <div class="md-cleaning-info white--text">{{ wiper.phone }}</div>
+    <div class="md-cleaning" v-if="items != null" v-for="(item) in items" :key="item.id">
+      <div class="md-cleaning-info white--text">{{ item.name }}</div>
+      <div class="md-cleaning-info white--text" v-if="item.phone != null">{{ item.phone }}</div>
       <div class="l-cleaning-actions">
         <!--<v-btn small flat color="light-blue lighten-1"  v-if="visibility">-->
           <!--<v-icon small>visibility</v-icon>-->
         <!--</v-btn>-->
-        <v-btn small flat color="yellow accent-1" @click.native="$emit('editItem', wiper)">
+        <v-btn small flat color="yellow accent-1" @click.native="$emit('editItem', item)">
           <v-icon>mode_edit</v-icon>
         </v-btn>
-        <v-btn small flat color="red lighten-1" @click.native="$emit('removeItem', wiper._id)">
+        <v-btn small flat color="red lighten-1" @click.native="$emit('removeItem', item._id)">
           <v-icon>delete_forever</v-icon>
         </v-btn>
       </div>
@@ -20,7 +20,7 @@
 
 <script>
   export default {
-    props: ['wipers']
+    props: ['items']
   }
 </script>
 

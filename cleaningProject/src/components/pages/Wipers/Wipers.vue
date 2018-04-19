@@ -9,7 +9,7 @@
       </div>
       <cleaning-list>
         <cleaning-list-header slot="cleaning-list-header"></cleaning-list-header>
-        <cleaning-list-body slot="cleaning-list-body" :wipers="wipers" @removeItem="removeWiper" @editItem="editWiper"></cleaning-list-body>
+        <cleaning-list-body slot="cleaning-list-body" :items="wipers" @removeItem="removeWiper" @editItem="editWiper"></cleaning-list-body>
       </cleaning-list>
     </div>
     <add-form v-if="showModal" @closeModal="showModal = false"></add-form>

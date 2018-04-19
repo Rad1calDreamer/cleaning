@@ -3,17 +3,17 @@
     <app-header></app-header>
 
     <div class="l-home">
-      <h1 class="white--text text-xs-center my-0">Список дворников</h1>
+      <h1 class="white--text text-xs-center my-0">Список Управляющих компаний</h1>
       <div class="add-button">
-        <v-btn @click.native="addWiper">Добавить</v-btn>
+        <v-btn @click.native="addItem">Добавить</v-btn>
       </div>
       <cleaning-list>
         <cleaning-list-header slot="cleaning-list-header"></cleaning-list-header>
-        <cleaning-list-body slot="cleaning-list-body" :wipers="wipers" @removeItem="removeWiper" @editItem="editWiper"></cleaning-list-body>
+        <cleaning-list-body slot="cleaning-list-body" :items="items" @removeItem="removeItem" @editItem="editItem"></cleaning-list-body>
       </cleaning-list>
     </div>
     <add-form v-if="showModal" @closeModal="showModal = false"></add-form>
-    <edit-form v-if="showModalEdit" @closeModal="showModalEdit = false" :wiper="_curWiper"></edit-form>
+    <!--<edit-form v-if="showModalEdit" @closeModal="showModalEdit = false" :item="_curItem"></edit-form>-->
   </main>
 </template>
 
@@ -22,9 +22,9 @@
   import Authentication from '@/components/pages/Authentication';
   import cleaningListHeader from '../../cleaning/cleaningListHeader';
   import cleaningListBody from '../../cleaning/cleaningListBody';
-  import addForm from '../../pages/Wipers/Add';
-  import editForm from '../../pages/Wipers/Edit';
-  import Wipers from '@/components/pages/Wipers';
+  import addForm from '../../pages/ManagementCompany/Add';
+  // import editForm from '../../pages/Wipers/Edit';
+  import ManagementCompany from '@/components/pages/ManagementCompany';
 
   const cleaningManagerAPI = `http://${window.location.hostname}:3001`;
   export default {
@@ -32,12 +32,12 @@
       'cleaning-list-header': cleaningListHeader,
       'cleaning-list-body': cleaningListBody,
       'add-form': addForm,
-      'edit-form': editForm
+      // 'edit-form': editForm
     },
     data() {
       return {
-        _curWiper:{},
-        wipers: [],
+        _curItem:{},
+        items: [],
         showModal: false,
         showModalEdit: false
 
@@ -48,22 +48,22 @@
     },
     methods: {
       getItems() {
-        Axios.get(`${cleaningManagerAPI}/api/v1/managementCompany`, {
+        Axios.get(`${cleaningManagerAPI}/api/v1/management-company`, {
           headers: {
             Authorization: Authentication.getAuthenticationHeader(this)
           },
           params: {user_id: this.$cookie.get('user_id')}
-        }).then(({data}) => (this.wipers = data));
+        }).then(({data}) => (this.items = data));
       },
-      addWiper() {
+      addItem() {
         this.showModal = true;
       },
-      removeWiper(id){
-        Wipers.remove(this, id);
+      removeItem(id){
+        ManagementCompany.remove(this, id);
       },
-      editWiper(item){
+      editItem(item){
         this.showModalEdit = true;
-        this._curWiper = item;
+        this._curItem = item;
       },
       closeModal(){
         this.showModal = false;

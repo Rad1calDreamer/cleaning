@@ -3,7 +3,7 @@
     <div class="main-menu">
       <a href="#/wipers">Дворники</a>
       <a href="">Адреса</a>
-      <a href="">УК</a>
+      <a href="#/management-company">УК</a>
     </div>
   </div>
 </template>

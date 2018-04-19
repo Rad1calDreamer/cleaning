@@ -5,6 +5,7 @@ import * as Auth from '@/components/pages/Authentication'
 // Pages
 import Home from '@/components/pages/Home'
 import Wipers from '@/components/pages/Wipers/Wipers'
+import ManagementCompanyList from '@/components/pages/ManagementCompany/List'
 import Authentication from '@/components/pages/Authentication/Authentication'
 
 // Global components
@@ -46,6 +47,20 @@ const router = new Router({
       name: 'Wipers',
       components: {
         default: Wipers,
+        header: Header,
+        cleaningList: CleaningList,
+        menu: Menu,
+        modal: Modal
+      },
+      meta: {
+        requiredAuth: true
+      }
+    },
+    {
+      path: '/management-company',
+      name: 'ManagementCompany',
+      components: {
+        default: ManagementCompanyList,
         header: Header,
         cleaningList: CleaningList,
         menu: Menu,

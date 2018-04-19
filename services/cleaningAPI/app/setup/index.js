@@ -8,7 +8,7 @@ const models = {
 	User: mongoose.model('User'),
 	Wiper: mongoose.model('Wiper'),
 	Address: mongoose.model('Address'),
-	ManagementCompany: mongoose.model('ManagementCompany')
+	ManagementCompany: mongoose.model('management-company')
 }
 
 module.exports = models;
