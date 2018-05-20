@@ -6,6 +6,7 @@ import * as Auth from '@/components/pages/Authentication'
 import Home from '@/components/pages/Home'
 import Wipers from '@/components/pages/Wipers/Wipers'
 import ManagementCompanyList from '@/components/pages/ManagementCompany/List'
+import AddressList from '@/components/pages/Address/List'
 import Authentication from '@/components/pages/Authentication/Authentication'
 
 // Global components
@@ -61,6 +62,20 @@ const router = new Router({
       name: 'ManagementCompany',
       components: {
         default: ManagementCompanyList,
+        header: Header,
+        cleaningList: CleaningList,
+        menu: Menu,
+        modal: Modal
+      },
+      meta: {
+        requiredAuth: true
+      }
+    },
+    {
+      path: '/address',
+      name: 'Address',
+      components: {
+        default: AddressList,
         header: Header,
         cleaningList: CleaningList,
         menu: Menu,

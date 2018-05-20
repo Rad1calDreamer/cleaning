@@ -1,15 +1,15 @@
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema({
-	name: {
-		type: String,
-		required: true
-	},
-
-	managmentCompany_id: {
-		type: mongoose.Schema.Types.ObjectId,
-		ref: 'managementCompany'
-	}
-});
-
+   name: {
+      type: String,
+      required: true
+   },
+   managementCompanyId: {
+      type: String,
+      required: true
+   }
+},
+{collection: 'address'}
+);
 mongoose.model('Address', Schema);

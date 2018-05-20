@@ -1,54 +1,72 @@
 const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 
 const api = {};
 
-api.add = (User, Address, Wiper, Token) => (req, res) => {
-	if (Token) {
+api.store = (User, Address, Token) => (req, res) => {
+   if (Token) {
+      const address = new Address({
+         user_id: req.body.user_id,
+         name: req.body.name
+      });
 
-		Client.findOne({ _id: req.body.client_id }, (error, client) => {
-			if (error) res.status(400).json(error);
+      address.save(error => {
+         if (error) {
+            return res.status(400).json(error);
+         }
+         res.status(200).json({ success: true, message: 'address registration successfull' });
+      });
+   } else {
+      return res.status(403).send({ success: false, message: 'Unauthorized' });
+   }
+};
 
-			if (client) {
-				const budget = new Budget({
-					client_id: req.body.client_id,
-					user_id: req.body.user_id,
-					client: client.name,
-					state: req.body.state,
-					title: req.body.title,
-					total_price: req.body.total_price,
-					items: req.body.items
-				});
+api.getAll = (User, Address, Token) => (req, res) => {
+   if (Token) {
+      Address.find({}, (error, list) => {
+         if (error) {
+            return res.status(400).json(error);
+         }
+         res.status(200).json(list);
+         return true;
+      });
+   } else {
+      return res.status(403).send({ success: false, message: 'Unauthorized' });
+   }
+};
 
-				budget.save(error => {
-					if (error) res.status(400).json(error)
-					res.status(200).json({ success: true, message: "Budget registered successfully" })
-				})
-			} else {
-				res.status(400).json({ success: false, message: "Invalid client" })
-			}
-		})
+api.remove = (User, Address, Token) => (req, res)=>{
+   if (Token) {
+      const id = req.body.id;
+      Address.deleteOne({'_id': new ObjectId(id)}, (error, result) =>{
+         if (error) {
+            return res.status(400).json(error);
+         }
+         res.status(200).json(result);
+         return true;
+      });
+   } else {
+      return res.status(403).send({ success: false, message: 'Unauthorized' });
+   }
+};
 
-	} else return res.status(403).send({ success: false, message: 'Unauthorized' });
-}
-
-api.getAll = (User, Budget, Token) => (req, res) => {
-	if (Token) {
-		Budget.find({ user_id: req.query.user_id }, (error, budget) => {
-			if (error) return res.status(400).json(error);
-			res.status(200).json(budget);
-			return true;
-		})
-	} else return res.status(403).send({ success: false, message: 'Unauthorized' });
-}
-
-api.getAllFromClient = (User, Budget, Token) => (req, res) => {
-	if (Token) {
-		Budget.find({ client_id: req.query.client_id }, (error, budget) => {
-			if (error) return res.status(400).json(error);
-			res.status(200).json(budget);
-			return true;
-		})
-	} else return res.status(403).send({ success: false, message: 'Unauthorized' });
-}
+api.edit = (User, Address, Token) => (req, res)=>{
+   if (Token) {
+      const address = {
+         id: req.body._id,
+         name: req.body.name,
+         managementCompanyId: req.body.managementCompanyId,
+      };
+      Address.update({'_id': new ObjectId(address.id)}, address, (error) =>{
+         if (error) {
+            return res.status(400).json(error);
+         }
+         res.status(200).json({ success: true, message: 'updated' });
+         return true;
+      });
+   } else {
+      return res.status(403).send({ success: false, message: 'Unauthorized' });
+   }
+};
 
 module.exports = api;
