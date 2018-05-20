@@ -38,6 +38,7 @@ export default {
         }})
       .then(() => {
         context.$parent.showModalEdit = false;
+        context.$parent.getItems();
       }).catch(({ response: { data } }) => {
       console.log('error', data)
     })

@@ -14,7 +14,7 @@
 
           <v-select label="Управляющая компания"
                     color="light-blue lighten-1"
-                    v-model="item.managementCompanyId"
+                    v-model="managementCompany"
                     prepend-icon="work"
                     :items="managementCompanyList"
                     item-text="name"
@@ -34,14 +34,13 @@
   import modal from '../../Modal';
   import Address from '@/components/pages/Address';
   export default {
-    props:['item','managementCompanyList','managementCompanyId'],
+    props:['item','managementCompanyList'],
     components: {
       'app-modal': modal,
     },
-    managementCompanyId: null,
     item:{
       name: '',
-      managementCompanyId:null
+      managementCompany:null
     },
     managementCompanyList: [],
     data() {
@@ -49,11 +48,13 @@
         snackbar: false,
         addressEdit: false,
         rules: [value => !!value || 'Обязательное поле'],
-        message: ''
+        message: '',
+        managementCompany: this.item.managementCompany._id,
       };
     },
     methods: {
       edit: function(){
+        this.item.managementCompany = this.managementCompany;
         Address.edit(this, this.item);
       },
       closeModal(){

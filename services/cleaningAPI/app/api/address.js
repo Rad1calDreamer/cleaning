@@ -7,7 +7,8 @@ api.store = (User, Address, Token) => (req, res) => {
    if (Token) {
       const address = new Address({
          user_id: req.body.user_id,
-         name: req.body.name
+         name: req.body.name,
+         managementCompany: req.body.company,
       });
 
       address.save(error => {
@@ -23,7 +24,7 @@ api.store = (User, Address, Token) => (req, res) => {
 
 api.getAll = (User, Address, Token) => (req, res) => {
    if (Token) {
-      Address.find({}, (error, list) => {
+      Address.find({}).populate('managementCompany').exec((error, list) => {
          if (error) {
             return res.status(400).json(error);
          }
@@ -55,7 +56,7 @@ api.edit = (User, Address, Token) => (req, res)=>{
       const address = {
          id: req.body._id,
          name: req.body.name,
-         managementCompanyId: req.body.managementCompanyId,
+         managementCompany: req.body.managementCompany,
       };
       Address.update({'_id': new ObjectId(address.id)}, address, (error) =>{
          if (error) {

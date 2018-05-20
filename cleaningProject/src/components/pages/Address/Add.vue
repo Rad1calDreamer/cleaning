@@ -4,23 +4,23 @@
     <div class="l-auth-container">
       <div class="l-auth">
         <v-form v-model="itemAdd">
-          <v-text-field label="Название"
+          <v-text-field label="Адрес"
                         v-model="item.name"
-                        prepend-icon="account_box"
+                        prepend-icon="place"
                         :rules="rules"
                         required
                         color="light-blue lighten-1">
           </v-text-field>
 
-          <!--<v-text-field label="Телефон"-->
-                        <!--v-model="wiper.phone"-->
-                        <!--prepend-icon="phone"-->
-                        <!--:rules="rules"-->
-                        <!--return-masked-value-->
-                        <!--mask="###-###-##-##"-->
-                        <!--color="light-blue lighten-1"-->
-                        <!--required>-->
-          <!--</v-text-field>-->
+          <v-select label="Управляющая компания"
+                    color="light-blue lighten-1"
+                    v-model="item.company"
+                    prepend-icon="work"
+                    :items="managementCompanyList"
+                    item-text="name"
+                    item-value="_id"
+                    single-line>
+          </v-select>
 
           <v-btn color="light-blue lighten-1" @click.native="addItem()">Добавить</v-btn>
         </v-form>
@@ -37,6 +37,7 @@
   import Address from '@/components/pages/Address';
   const cleaningManagerAPI = `http://${window.location.hostname}:3001`;
   export default {
+    props:['managementCompanyList'],
     components: {
       'app-modal': modal,
     },
@@ -45,8 +46,10 @@
         snackbar: false,
         itemAdd: false,
         rules: [value => !!value || 'Обязательное поле'],
+        companyId: '',
         item: {
-          name: ''
+          name: '',
+          company: null
         },
         message: ''
       };

@@ -9,10 +9,10 @@
       </div>
       <cleaning-list>
         <cleaning-list-header slot="cleaning-list-header"></cleaning-list-header>
-        <cleaning-list-body slot="cleaning-list-body" :items="items" @removeItem="removeItem" @editItem="editItem"></cleaning-list-body>
+        <cleaning-list-body slot="cleaning-list-body" :items="items"  :companyList="companyList" @removeItem="removeItem" @editItem="editItem"></cleaning-list-body>
       </cleaning-list>
     </div>
-    <add-form v-if="showModal" @closeModal="showModal = false"></add-form>
+    <add-form v-if="showModal" @closeModal="showModal = false" :managementCompanyList="companyList"></add-form>
     <edit-form v-if="showModalEdit" @closeModal="showModalEdit = false" :item="_curItem" :managementCompanyList="companyList"></edit-form>
   </main>
 </template>
@@ -21,7 +21,7 @@
   import Axios from 'axios';
   import Authentication from '@/components/pages/Authentication';
   import cleaningListHeader from '../../list/address/header';
-  import cleaningListBody from '../../cleaning/cleaningListBody';
+  import cleaningListBody from '../../list/address/body';
   import addForm from '../../pages/Address/Add';
   import editForm from '../../pages/Address/Edit';
   import Address from '@/components/pages/Address';
