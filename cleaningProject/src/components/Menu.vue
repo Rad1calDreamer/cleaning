@@ -4,6 +4,7 @@
       <a href="#/wipers">Дворники</a>
       <a href="#/address">Адреса</a>
       <a href="#/management-company">УК</a>
+      <a href="#/work">Работы</a>
     </div>
   </div>
 </template>

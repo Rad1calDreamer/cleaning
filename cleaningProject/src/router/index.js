@@ -7,6 +7,7 @@ import Home from '@/components/pages/Home'
 import Wipers from '@/components/pages/Wipers/Wipers'
 import ManagementCompanyList from '@/components/pages/ManagementCompany/List'
 import AddressList from '@/components/pages/Address/List'
+import WorkList from '@/components/pages/Work/List'
 import Authentication from '@/components/pages/Authentication/Authentication'
 
 // Global components
@@ -76,6 +77,20 @@ const router = new Router({
       name: 'Address',
       components: {
         default: AddressList,
+        header: Header,
+        cleaningList: CleaningList,
+        menu: Menu,
+        modal: Modal
+      },
+      meta: {
+        requiredAuth: true
+      }
+    },
+    {
+      path: '/work',
+      name: 'Work',
+      components: {
+        default: WorkList,
         header: Header,
         cleaningList: CleaningList,
         menu: Menu,

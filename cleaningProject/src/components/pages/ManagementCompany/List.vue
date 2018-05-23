@@ -20,8 +20,8 @@
 <script>
   import Axios from 'axios';
   import Authentication from '@/components/pages/Authentication';
-  import cleaningListHeader from '../../cleaning/cleaningListHeader';
-  import cleaningListBody from '../../cleaning/cleaningListBody';
+  import cleaningListHeader from '../../list/company/header';
+  import cleaningListBody from '../../list/company/body';
   import addForm from '../../pages/ManagementCompany/Add';
   // import editForm from '../../pages/Wipers/Edit';
   import ManagementCompany from '@/components/pages/ManagementCompany';
