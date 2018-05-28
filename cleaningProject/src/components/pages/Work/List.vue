@@ -13,7 +13,13 @@
       </cleaning-list>
     </div>
     <add-form v-if="showModal" @closeModal="showModal = false" :addressList="addressList" :wiperList="wiperList"></add-form>
-    <edit-form v-if="showModalEdit" @closeModal="showModalEdit = false" :item="_curItem" :wiperList="wiperList" :managementCompanyList="companyList"></edit-form>
+    <edit-form v-if="showModalEdit"
+               @closeModal="showModalEdit = false"
+               :item="_curItem"
+               :wiperList="wiperList"
+               :addressList="addressList">
+
+    </edit-form>
   </main>
 </template>
 
@@ -46,14 +52,7 @@
       };
     },
     mounted() {
-      this.getItems().then(()=>{
-        this.items.forEach((_item)=>{
-          const d = new Date(_item.dateStart);
-          const b = new Date(_item.dateEnd);
-          _item.dateStart = d.toLocaleDateString();
-          _item.dateEnd = b.toLocaleDateString();
-        })
-      });
+      this.getItems();
       this.getAddressList();
       this.getWiperList();
     },
@@ -64,7 +63,14 @@
             Authorization: Authentication.getAuthenticationHeader(this)
           },
           params: {user_id: this.$cookie.get('user_id')}
-        }).then(({data}) => (this.items = data));
+        }).then(({data}) => (this.items = data)).then(()=>{
+        this.items.forEach((_item)=>{
+          const d = new Date(_item.dateStart);
+          const b = new Date(_item.dateEnd);
+          _item.dateStart = d.toLocaleDateString().split('.').join('-');
+          _item.dateEnd = b.toLocaleDateString().split('.').join('-');
+        })
+      });
       },
       addItem() {
         this.showModal = true;

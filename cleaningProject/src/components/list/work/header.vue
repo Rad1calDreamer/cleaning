@@ -34,7 +34,7 @@
       height: 45px;
       align-items: center;
       justify-content: center;
-      font-size: 22px;
+      font-size: 17px;
       @media (min-width: 601px) {
         justify-content: flex-start;
       }

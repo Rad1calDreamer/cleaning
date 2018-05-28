@@ -129,7 +129,6 @@
     },
     methods: {
       addItem: function(){
-        debugger;
         Work.add(this, this.item);
       },
       closeModal(){

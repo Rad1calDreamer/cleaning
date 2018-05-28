@@ -14,7 +14,7 @@ api.store = (User, Work, Token) => (req, res) => {
          type: req.body.type,
          address: req.body.address,
       });
-
+      console.log('work add', work);
       work.save(error => {
          if (error) {
             return res.status(400).json(error);
@@ -55,14 +55,21 @@ api.remove = (User, Work, Token) => (req, res)=>{
    }
 };
 
-api.edit = (User, Work, Token) => (req, res)=>{
+api.edit = (User, Work, Address, Wiper, Token) => (req, res)=>{
    if (Token) {
-      const address = {
+      const work = {
          id: req.body._id,
-         name: req.body.name,
-         managementCompany: req.body.managementCompany,
+         wiper: req.body.wiper,
+         dateStart: req.body.dateStart,
+         dateEnd: req.body.dateEnd,
+         sum: parseInt(req.body.sum, 10),
+         type: req.body.type,
+         address: req.body.address,
       };
-      Work.update({'_id': new ObjectId(address.id)}, address, (error) =>{
+      console.log('work', work);
+      Work.update({'_id': new ObjectId(work.id)}, work, (error, result) =>{
+         console.log('error', error);
+         console.log('result', result);
          if (error) {
             return res.status(400).json(error);
          }

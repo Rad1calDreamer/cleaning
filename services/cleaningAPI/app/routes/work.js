@@ -16,5 +16,5 @@ module.exports = (app) => {
       .post(passport.authenticate('jwt', config.session), api.remove(models.User, models.Work, app.get('cleaningsecret')));
 
    app.route('/api/v1/work/edit')
-      .post(passport.authenticate('jwt', config.session), api.edit(models.User, models.Work, app.get('cleaningsecret')));
+      .post(passport.authenticate('jwt', config.session), api.edit(models.User, models.Work, models.Address, models.Wiper, app.get('cleaningsecret')));
 };
