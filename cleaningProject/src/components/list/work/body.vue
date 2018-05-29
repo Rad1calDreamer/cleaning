@@ -3,8 +3,8 @@
     <div class="md-cleaning" v-if="items != null" v-for="(item) in items" :key="item.id">
       <div class="md-cleaning-info white--text">{{ item.wiper.name }}</div>
       <div class="md-cleaning-info white--text">{{ item.address.name }}</div>
-      <div class="md-cleaning-info white--text">{{ item.dateStart }}</div>
-      <div class="md-cleaning-info white--text">{{ item.dateEnd }}</div>
+      <div class="md-cleaning-info white--text">{{ convertDateToHuman(item.dateStart) }}</div>
+      <div class="md-cleaning-info white--text">{{ convertDateToHuman(item.dateEnd) }}</div>
       <div class="md-cleaning-info white--text">{{ item.type }}</div>
       <div class="md-cleaning-info white--text">{{ item.sum }}</div>
       <div class="l-cleaning-actions">
@@ -24,7 +24,13 @@
 
 <script>
   export default {
-    props: ['items']
+    props: ['items'],
+    methods:{
+      convertDateToHuman: function(date){
+        var _date = new Date(date);
+        return [_date.getDate(),_date.getMonth()+1, _date.getFullYear()].join('-');
+      }
+    }
   }
 </script>
 

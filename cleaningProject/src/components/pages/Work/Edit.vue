@@ -8,7 +8,7 @@
             <v-menu
               ref="dateStart"
               :close-on-content-click="false"
-              v-model="menuDateStart"
+              v-model="dateStart"
               :nudge-right="40"
               :return-value.sync="date"
               lazy
@@ -34,7 +34,7 @@
             <v-menu
               ref="dateEnd"
               :close-on-content-click="false"
-              v-model="menuDateEnd"
+              v-model="dateEnd"
               :nudge-right="40"
               :return-value.sync="date"
               lazy
@@ -52,7 +52,7 @@
               ></v-text-field>
               <v-date-picker v-model="item.dateEnd" no-title scrollable>
                 <v-spacer></v-spacer>
-                <v-btn flat color="primary" @click="this.menuDateEnd = false">Cancel</v-btn>
+                <v-btn flat color="primary" @click="this.dateEnd = false">Cancel</v-btn>
                 <v-btn flat color="primary" @click="$refs.dateEnd.save(item.dateEnd)">OK</v-btn>
               </v-date-picker>
             </v-menu>
@@ -112,7 +112,6 @@
       'app-modal': modal,
     },
     data() {
-      debugger;
       return {
         snackbar: false,
         itemAdd: false,
@@ -120,8 +119,8 @@
         companyId: '',
         date: null,
         modal: false,
-        menuDateStart: false,
-        menuDateEnd: false,
+        dateEnd: false,
+        dateStart: false,
         type:['Штраф','Препия','Зп'],
         message: '',
         address: this.item.address._id,

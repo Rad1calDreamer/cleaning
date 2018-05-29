@@ -63,14 +63,14 @@
             Authorization: Authentication.getAuthenticationHeader(this)
           },
           params: {user_id: this.$cookie.get('user_id')}
-        }).then(({data}) => (this.items = data)).then(()=>{
+        }).then(({data}) => (this.items = data))/*.then(()=>{
         this.items.forEach((_item)=>{
           const d = new Date(_item.dateStart);
           const b = new Date(_item.dateEnd);
           _item.dateStart = d.toLocaleDateString().split('.').join('-');
           _item.dateEnd = b.toLocaleDateString().split('.').join('-');
         })
-      });
+      });*/
       },
       addItem() {
         this.showModal = true;
