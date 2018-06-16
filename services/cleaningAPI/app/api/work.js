@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const  moment = require('moment');
 const ObjectId = mongoose.Types.ObjectId;
 
 const api = {};
@@ -14,7 +15,6 @@ api.store = (User, Work, Token) => (req, res) => {
          type: req.body.type,
          address: req.body.address,
       });
-      console.log('work add', work);
       work.save(error => {
          if (error) {
             return res.status(400).json(error);
@@ -32,7 +32,19 @@ api.getAll = (User, Work, Address, Wiper, Token) => (req, res) => {
          if (error) {
             return res.status(400).json(error);
          }
-         res.status(200).json(list);
+         let result = [];
+         result = list.map((item) =>{
+            return {
+               _id: item._id,
+               wiper: item.wiper,
+               address: item.address,
+               sum: item.sum,
+               type: item.type,
+               dateStart: moment(item.dateStart).format('YYYY-MM-DD'),
+               dateEnd: moment(item.dateEnd).format('YYYY-MM-DD')
+            };
+         });
+         res.status(200).json(result);
          return true;
       });
    } else {
@@ -60,16 +72,15 @@ api.edit = (User, Work, Address, Wiper, Token) => (req, res)=>{
       const work = {
          id: req.body._id,
          wiper: req.body.wiper,
-         dateStart: req.body.dateStart,
-         dateEnd: req.body.dateEnd,
+         dateStart: moment(req.body.dateStart),
+         dateEnd: moment(req.body.dateEnd),
          sum: parseInt(req.body.sum, 10),
          type: req.body.type,
          address: req.body.address,
       };
-      console.log('work', work);
-      Work.update({'_id': new ObjectId(work.id)}, work, (error, result) =>{
-         console.log('error', error);
-         console.log('result', result);
+
+      Work.update({'_id': new ObjectId(work.id)}, work, (error) =>{
+
          if (error) {
             return res.status(400).json(error);
          }

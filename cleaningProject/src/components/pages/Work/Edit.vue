@@ -4,7 +4,6 @@
       <div class="l-auth-container">
         <div class="l-auth">
           <v-form v-model="itemAdd">
-
             <v-menu
               ref="dateStart"
               :close-on-content-click="false"
