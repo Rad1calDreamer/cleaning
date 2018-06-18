@@ -122,7 +122,7 @@
         modal: false,
         menuDateStart: false,
         menuDateEnd: false,
-        type:['Штраф','Препия','Зп'],
+        type:['Штраф','Премия','Зп'],
         item: {},
         message: ''
       };

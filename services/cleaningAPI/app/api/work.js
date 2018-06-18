@@ -72,8 +72,8 @@ api.edit = (User, Work, Address, Wiper, Token) => (req, res)=>{
       const work = {
          id: req.body._id,
          wiper: req.body.wiper,
-         dateStart: moment(req.body.dateStart),
-         dateEnd: moment(req.body.dateEnd),
+         dateStart: moment(req.body.dateStart).toISOString(),
+         dateEnd: moment(req.body.dateEnd).toISOString(),
          sum: parseInt(req.body.sum, 10),
          type: req.body.type,
          address: req.body.address,
@@ -92,4 +92,36 @@ api.edit = (User, Work, Address, Wiper, Token) => (req, res)=>{
    }
 };
 
+api.calculate = (User, Work, Wiper, Token)=> (req, res)=>{
+   if  (Token) {
+      Work.find({
+         dateStart: { $gte: moment(req.body.dateStart).toISOString() },
+         dateEnd: { $lte: moment(req.body.dateEnd).toISOString() }
+      }).populate('wiper').exec((err, list)=>{
+         let result = [];
+         list.forEach(item=>{
+            const
+               sum = item.type === 'Штраф' ? (-1 * item.sum) : item.sum,
+               findedItem = result.find(_item=>{
+                  return _item.wiperId === item.wiper._id;
+               });
+            if (!findedItem) {
+               result.push({
+                  'sum': sum,
+                  'wiperName': item.wiper.name,
+                  'wiperId': item.wiper._id,
+               });
+            } else {
+               findedItem.sum  += sum;
+            }
+         });
+         res.status(200).json({ success: true, list: result });
+         return true;
+
+      });
+
+   } else {
+      return res.status(403).send({ success: false, message: 'Unauthorized' });
+   }
+};
 module.exports = api;

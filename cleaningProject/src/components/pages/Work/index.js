@@ -43,4 +43,18 @@ export default {
       console.log('error', data)
     })
   },
+
+  calculate(context, dateObject){
+    Axios.post(`${cleaningManagerAPI}/api/v1/work/calculate`, dateObject,{
+        headers: {
+          Authorization: Authentication.getAuthenticationHeader(context)
+        }})
+      .then((result) => {
+        context.$parent.showModalCalculate = false;
+        context.$parent.sumItems = result.data.list;
+      }).catch(({ response: { data } }) => {
+      console.log('error', data)
+    })
+
+  }
 }

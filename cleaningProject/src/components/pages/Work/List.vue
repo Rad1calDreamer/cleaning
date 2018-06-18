@@ -6,11 +6,16 @@
       <h1 class="white--text text-xs-center my-0">Выполненные работы</h1>
       <div class="add-button">
         <v-btn @click.native="addItem">Добавить</v-btn>
+        <v-btn @click.native="calculate">Рассчет</v-btn>
       </div>
       <cleaning-list>
         <cleaning-list-header slot="cleaning-list-header"></cleaning-list-header>
         <cleaning-list-body slot="cleaning-list-body" :items="items"  :addressList="addressList" :wiperList="wiperList" @removeItem="removeItem" @editItem="editItem"></cleaning-list-body>
       </cleaning-list>
+      <sum-table :records="sumItems"></sum-table>
+    </div>
+    <div>
+
     </div>
     <add-form v-if="showModal" @closeModal="showModal = false" :addressList="addressList" :wiperList="wiperList"></add-form>
     <edit-form v-if="showModalEdit"
@@ -20,6 +25,7 @@
                :addressList="addressList">
 
     </edit-form>
+    <calculate-form v-if="showModalCalculate" @closeModal="showModalCalculate = false"></calculate-form>
   </main>
 </template>
 
@@ -30,6 +36,8 @@
   import cleaningListBody from '../../list/work/body';
   import addForm from '../../pages/Work/Add';
   import editForm from '../../pages/Work/Edit';
+  import calculateForm from '../../pages/Work/Calculate';
+  import CalcTable from '../../list/work/SumTable';
   import Work from '@/components/pages/Work';
 
   const cleaningManagerAPI = `http://${window.location.hostname}:3001`;
@@ -38,7 +46,9 @@
       'cleaning-list-header': cleaningListHeader,
       'cleaning-list-body': cleaningListBody,
       'add-form': addForm,
-      'edit-form': editForm
+      'edit-form': editForm,
+      'calculate-form': calculateForm,
+      'sum-table': CalcTable,
     },
     data() {
       return {
@@ -46,9 +56,10 @@
         wiperList: [],
         addressList: [],
         items: [],
+        sumItems: [],
         showModal: false,
-        showModalEdit: false
-
+        showModalEdit: false,
+        showModalCalculate: false
       };
     },
     mounted() {
@@ -63,14 +74,7 @@
             Authorization: Authentication.getAuthenticationHeader(this)
           },
           params: {user_id: this.$cookie.get('user_id')}
-        }).then(({data}) => (this.items = data))/*.then(()=>{
-        this.items.forEach((_item)=>{
-          const d = new Date(_item.dateStart);
-          const b = new Date(_item.dateEnd);
-          _item.dateStart = d.toLocaleDateString().split('.').join('-');
-          _item.dateEnd = b.toLocaleDateString().split('.').join('-');
-        })
-      });*/
+        }).then(({data}) => (this.items = data));
       },
       addItem() {
         this.showModal = true;
@@ -101,6 +105,9 @@
           },
           params: {user_id: this.$cookie.get('user_id')}
         }).then(({data}) => (this.wiperList = data));
+      },
+      calculate: function(){
+      this.showModalCalculate = true;
       }
     }
   };

@@ -3,7 +3,7 @@
     <app-modal @closeModal="closeModal">
       <div class="l-auth-container">
         <div class="l-auth">
-          <v-form v-model="itemAdd">
+          <v-form>
             <v-menu
               ref="dateStart"
               :close-on-content-click="false"
@@ -18,15 +18,15 @@
             >
               <v-text-field
                 slot="activator"
-                v-model="item.dateStart"
+                v-model="startPeriod"
                 label="Дата начала"
                 prepend-icon="event"
                 readonly
               ></v-text-field>
-              <v-date-picker v-model="item.dateStart" no-title scrollable>
+              <v-date-picker v-model="startPeriod" no-title scrollable>
                 <v-spacer></v-spacer>
                 <v-btn flat color="primary" @click="this.dateStart = false">Cancel</v-btn>
-                <v-btn flat color="primary" @click="$refs.dateStart.save(item.dateStart)">OK</v-btn>
+                <v-btn flat color="primary" @click="$refs.dateStart.save(startPeriod)">OK</v-btn>
               </v-date-picker>
             </v-menu>
 
@@ -44,54 +44,18 @@
             >
               <v-text-field
                 slot="activator"
-                v-model="item.dateEnd"
+                v-model="endPeriod"
                 label="Дата окончания"
                 prepend-icon="event"
                 readonly
               ></v-text-field>
-              <v-date-picker v-model="item.dateEnd" no-title scrollable>
+              <v-date-picker v-model="endPeriod" no-title scrollable>
                 <v-spacer></v-spacer>
                 <v-btn flat color="primary" @click="this.dateEnd = false">Cancel</v-btn>
-                <v-btn flat color="primary" @click="$refs.dateEnd.save(item.dateEnd)">OK</v-btn>
+                <v-btn flat color="primary" @click="$refs.dateEnd.save(endPeriod)">OK</v-btn>
               </v-date-picker>
             </v-menu>
-            <v-text-field label="Сумма"
-                          v-model="item.sum"
-                          prepend-icon="money"
-                          :rules="rules"
-                          required
-                          color="light-blue lighten-1">
-            </v-text-field>
-
-            <v-select label="Дворник"
-                      color="light-blue lighten-1"
-                      v-model="item.wiper"
-                      prepend-icon="rowing"
-                      :items="wiperList"
-                      item-text="name"
-                      item-value="_id"
-                      single-line>
-            </v-select>
-
-            <v-select label="Адрес"
-                      color="light-blue lighten-1"
-                      v-model="item.address"
-                      prepend-icon="place"
-                      :items="addressList"
-                      item-text="name"
-                      item-value="_id"
-                      single-line>
-            </v-select>
-
-            <v-select label="Тип"
-                      color="light-blue lighten-1"
-                      v-model="item.type"
-                      prepend-icon="poll"
-                      :items="type"
-                      single-line>
-            </v-select>
-
-            <v-btn color="light-blue lighten-1" @click.native="edit()">Обновить</v-btn>
+            <v-btn color="light-blue lighten-1" @click.native="calculate()">Рассчитать</v-btn>
           </v-form>
         </div>
       </div>
@@ -106,29 +70,28 @@
   import Work from '@/components/pages/Work';
   const cleaningManagerAPI = `http://${window.location.hostname}:3001`;
   export default {
-    props:['addressList','wiperList', 'item'],
     components: {
       'app-modal': modal,
     },
     data() {
       return {
         snackbar: false,
-        itemAdd: false,
         rules: [value => !!value || 'Обязательное поле'],
-        companyId: '',
         date: null,
         modal: false,
         dateEnd: false,
         dateStart: false,
-        type:['Штраф','Премия','Зп'],
+        startPeriod: '',
+        endPeriod: '',
         message: '',
-        address: this.item.address._id,
-        wiper: this.item.wiper._id,
       };
     },
     methods: {
-      edit: function(){
-        Work.edit(this, this.item);
+      calculate: function(){
+        Work.calculate(this, {
+          dateStart: this.startPeriod,
+          dateEnd: this.endPeriod
+        })
       },
       closeModal(){
        this.$emit('closeModal')
