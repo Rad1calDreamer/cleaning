@@ -2,7 +2,7 @@
   <v-data-table
     :headers="headers"
     :items="records"
-    class="elevation-1"
+    class="resultTable-table"
   >
     <template slot="headerCell" slot-scope="props">
       <v-tooltip bottom>
@@ -22,6 +22,7 @@
 </template>
 <script>
   export default {
+    props:['records'],
     name: 'SumTable',
     data() {
       return {
@@ -34,7 +35,8 @@
           },
           {
             text: 'Сумма',
-            value: 'sum'
+            value: 'sum',
+            align: 'left',
           }
         ]
       };
@@ -43,5 +45,7 @@
 </script>
 
 <style scoped>
-
+.resultTable-table{
+  text-align: left;
+}
 </style>
