@@ -5,6 +5,26 @@ const Schema = mongoose.Schema({
       type: String,
       required: true
    },
+      floorCount: {
+      type: Number,
+      required: true
+   },
+   porch: {
+      type: Number,
+      required: true
+   },
+   elevator: {
+      type: Boolean,
+      required: true
+   },
+   houseSquare: {
+      type: Number,
+      required: true
+   },
+   nearSquare: {
+      type: Number,
+      required: true
+   },
    managementCompany: {
       type: ObjectId,
       required: false,

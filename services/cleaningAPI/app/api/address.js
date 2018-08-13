@@ -8,9 +8,13 @@ api.store = (User, Address, Token) => (req, res) => {
       const address = new Address({
          user_id: req.body.user_id,
          name: req.body.name,
-         managementCompany: req.body.company,
+         floorCount: parseInt(req.body.floorCount, 10),
+         porch: parseInt(req.body.porch, 10),
+         elevator: req.body.elevator,
+         houseSquare: parseInt(req.body.houseSquare, 10),
+         nearSquare: parseInt(req.body.nearSquare, 10),
+         managementCompany: req.body.company
       });
-
       address.save(error => {
          if (error) {
             return res.status(400).json(error);
@@ -56,7 +60,12 @@ api.edit = (User, Address, Token) => (req, res)=>{
       const address = {
          id: req.body._id,
          name: req.body.name,
-         managementCompany: req.body.managementCompany,
+         floorCount: parseInt(req.body.floorCount, 10),
+         porch: parseInt(req.body.porch, 10),
+         elevator: req.body.elevator,
+         houseSquare: parseInt(req.body.houseSquare, 10),
+         nearSquare: parseInt(req.body.nearSquare, 10),
+         managementCompany: req.body.company
       };
       Address.update({'_id': new ObjectId(address.id)}, address, (error) =>{
          if (error) {
