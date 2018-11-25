@@ -12,8 +12,8 @@ export default {
           Authorization: Authentication.getAuthenticationHeader(context)
         }})
       .then(() => {
-        context.$parent.showModal = false;
-        context.$parent.getItems();
+        context.showModal = false;
+        context.getItems();
       }).catch(({ response: { data } }) => {
       context.snackbar = true;
       context.message = data.message
@@ -37,8 +37,7 @@ export default {
           Authorization: Authentication.getAuthenticationHeader(context)
         }})
       .then(() => {
-        context.$parent.showModalEdit = false;
-        context.$parent.getItems();
+        context.getItems();
       }).catch(({ response: { data } }) => {
       console.log('error', data)
     })
